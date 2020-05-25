@@ -11,30 +11,31 @@
 |
 */
 
-use App\Categoria;
-use App\Produto;
+
+use App\Desenvolvedor;
+use App\Projeto;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/categorias', function () {
+Route::get('/desenvolvedor_projetos', function () {
     
-    $cats = Categoria::all();
+    $devs = Desenvolvedor::all();
 
-    if(count($cats) === 0){
-        echo "<h4> Não existem categoiras cadastradas </h4>";
+    if(count($devs) === 0){
+        echo "<h4> Não existem Desenvolvedores cadastrados </h4>";
     }else{
         
-        foreach($cats as $c){
-            echo "<h3> Categoria: </h3>";
-            echo "<ul> <li> " . $c->nome . "</li></ul>";
-            $produtos  = $c->produtos;
+        foreach($devs as $dev){
+            echo "<h3> Desenvolvedor: </h3>";
+            echo "<ul> <li> " . $dev->nome . "</li></ul>";
+            $projetos  = $dev->projetos;
 
-            if(count($produtos) > 0){
-                echo "<h4>Produtos da categoria: </h4>";
+            if(count($projetos) > 0){
+                echo "<h4>Projetos do desenvolvedor: </h4>";
                 echo "<ul>";
-                foreach($c->produtos as $prod){
-                    echo " <li>" . $prod->nome . " </li>";
+                foreach($dev->projetos as $proj){
+                    echo " <li>" . $proj->nome . " </li>";
                 }
                 echo "</ul> <hr>";
             }
@@ -42,45 +43,37 @@ Route::get('/categorias', function () {
     }
 });
 
-Route::get('/produtos', function () {
+Route::get('/projeto_desenvolvedores', function () {
     
-    $prods = Produto::all();
+    $projs = Projeto::all();
 
-    if(count($prods) === 0){
-        echo "<h4> Não existem Produtos cadastrados </h4>";
+    if(count($projs) === 0){
+        echo "<h4> Não existem Projetos cadastrados </h4>";
     }else{
-        echo "<h3> Produtos: </h3> <hr>";
+        foreach($projs as $proj){
+            echo "<h3> Projeto: </h3>";
+            echo "<ul> <li> " . $proj->nome . "</li></ul>";
+            $devs  = $proj->desenvolvedores;
 
-        echo "<table> 
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Nome</td>
-                        <td>Preço</td>
-                        <td>Estoque</td>
-                        <td>Categoria</td>
-                    </tr>
-                </thead>";
-        foreach($prods as $p){
-            echo "<tr> 
-                    <td>" . $p->id . "</td>
-                    <td>" . $p->nome . "</td>
-                    <td>" . $p->preco . "</td>
-                    <td>" . $p->estoque . "</td>
-                    <td>" . $p->categoria->nome . "</td>  
-                </tr>";
+            if(count($devs) > 0){
+                echo "<h4>Desenvolvedores no Projeto: </h4>";
+                echo "<ul>";
+                foreach($devs as $dev){
+                    echo " <li>" . $dev->nome . " </li>";
+                }
+                echo "</ul> <hr>";
+            }
         }
-        echo "</table>";
     }
 });
 
-// Retorna a Categoria com seus produtos
-Route::get('/categoriasprodutos/json', function(){
-    $cats1 = Categoria::all();  // Carregamento tardio (Lazy loading) = Não traz os relaciomentos
+// Retorna o Projeto com seus desenvolvedores
+Route::get('/projeto_desenvolvedores/json', function(){
+    $projetos1 = Projeto::all();  // Carregamento tardio (Lazy loading) = Não traz os relaciomentos
 
-    $cats2 = Categoria::with('produtos')->get(); // Carregamento Rápido (Eager loading) = Traz os dados dos relaciomentos informados
+    $projetos2 = Projeto::with('desenvolvedores')->get(); // Carregamento Rápido (Eager loading) = Traz os dados dos relaciomentos informados
 
-    return $cats2->toJson();
+    return $projetos2->toJson();
 });
 
 

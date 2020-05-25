@@ -14,8 +14,9 @@ class DatabaseSeeder extends Seeder
         // Chamar as seeds externas
 
         $this->call([
-            CategoiraSeeder::class,
-            ProdutoSeeder::class
+            DesenvolvedorSeeder::class,
+            ProjetosSeeder::class,
+            AlocacoesSeeder::class
         ]);
     }
 }

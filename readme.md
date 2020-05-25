@@ -3,6 +3,6 @@
 O projeto consiste em 3 tabelas:
     1ª) DESENVOLVEDOR
     2ª) PROJETO
-    3ª) PROJETOS_DESENVOLVEDORES
+    3ª) ALOCACAO
     
 

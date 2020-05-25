@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProdutosTable extends Migration
+class CreateProjetosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateProdutosTable extends Migration
      */
     public function up()
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('projetos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->float('preco');
-            $table->integer('estoque');
-            $table->unsignedBigInteger('categoria_id')->nullable(); // Neste caso, pode criar um produto sem categoria
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->integer('estimativa_horas');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateProdutosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('projetos');
     }
 }
