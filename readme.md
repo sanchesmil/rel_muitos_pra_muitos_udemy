@@ -19,7 +19,7 @@ No relacionamento 'MUITOS p/ MUITOS':
 
 --------------------------------------------------------------------
 
-Obter os campos da tabela de ligação (chamada de PIVOT pelo Laravel)
+Como obter os campos da tabela de ligação, chamada de PIVOT pelo Laravel?
 
 * Por padrão, o Laravel não busca os campos da tabela de ligação.
 
