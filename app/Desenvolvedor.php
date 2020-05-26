@@ -10,6 +10,9 @@ class Desenvolvedor extends Model
 
     // relacionamento n x n
     public function projetos(){
-        return $this->belongsToMany('App\Projeto','alocacoes'); // 1º Parm: Modelo que vou retornar, 2º Parm: tabela de vínculo
+
+        //belongsToMany = 1º Parm: Modelo que vou retornar, 2º Parm: tabela de vínculo/ligação
+        //withPivot = retorna o(s) campo(s) da tabela de ligação que eu desejo pegar
+        return $this->belongsToMany('App\Projeto','alocacoes')->withPivot('horas_semanais');
     }
 }

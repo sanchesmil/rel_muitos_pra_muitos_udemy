@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Projeto extends Model
 {
     function desenvolvedores(){
-        return $this->belongsToMany('App\Desenvolvedor','alocacoes'); // 1º Parm: Modelo que vou retornar, 2º Parm: tabela de vínculo
+
+        //belongsToMany = 1º Parm: Modelo que vou retornar, 2º Parm: tabela de vínculo/ligação
+        //withPivot = retorna o(s) campo(s) da tabela de ligação que eu desejo pegar
+        return $this->belongsToMany('App\Desenvolvedor','alocacoes')->withPivot('horas_semanais');  
     }
 }
