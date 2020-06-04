@@ -42,6 +42,8 @@ Route::get('/desenvolvedor_projetos', function () {
                     echo " <br></ul>";
                 }
                 echo "</ul> <hr>";
+            }else{
+                echo "<h4> Obs.: Este desenvolvedor não está alocado em nenhum Projeto</h4> <hr>";
             }
         }
     }
@@ -70,6 +72,8 @@ Route::get('/projeto_desenvolvedores', function () {
                     echo " <li> Horas semanais do Desenvolvedor: " . $dev->pivot->horas_semanais . " </li> <br>";
                 }
                 echo "</ul> <hr>";
+            }else{
+                echo "<h4>Obs.:  Este Projeto ainda não possui desenvolvedores alocados.</h4> <hr>";
             }
         }
     }
@@ -84,6 +88,7 @@ Route::get('/projeto_desenvolvedores/json', function(){
     return $projetos2->toJson();
 });
 
+// Retorna os Desenvolvedores com seus Projetos
 Route::get('/desenvolvedor_projetos/json', function(){
     $devs = Desenvolvedor::with('projetos')->get();
 
@@ -93,7 +98,7 @@ Route::get('/desenvolvedor_projetos/json', function(){
 // Associação de instâncias no relacionamento "MUITOS para MUITOS"
 // Usando o método: 'ATTACH'
 
-// Anexar um Desenvolvedor a um Projeto, inserindo um registro na tabela intermediária que une os dois modelos (ALOCACAO)
+// Anexa um Desenvolvedor a um Projeto, inserindo um registro na tabela intermediária que une os dois modelos (ALOCACAO)
 Route::get('/alocar_desenvolvedor_no_projeto', function(){
     $proj = Projeto::find(1); // Projeto: Sistema Alocação de Recursos
 
@@ -111,8 +116,8 @@ Route::get('/alocar_desenvolvedor_no_projeto', function(){
 
         // ASSOCIAR vários registros ao mesmo tempo usando array de IDs
         $proj->desenvolvedores()->attach([
-            1 => ['horas_semanais' => 7],
-            2 => ['horas_semanais' => 9],
+            1 => ['horas_semanais' => 7],  //Joao
+            2 => ['horas_semanais' => 9],  //Raquel
        ]);
 
         $proj->load('desenvolvedores'); // Atualiza a instância de Projetos trazendo os desenvolvedores recem associados

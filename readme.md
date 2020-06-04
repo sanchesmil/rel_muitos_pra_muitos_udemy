@@ -5,6 +5,10 @@ O projeto consiste em 3 tabelas:
 * PROJETO
 * ALOCACAO
     
+- Relacionamento 'n x n':
+
+    '1' DESENVOLVEDOR pode estar ALOCADO a 'N' PROJETOS e 
+    '1' PROJETO pode ALOCAR 'N' DESENVOLVEDORES
 --------------------------------------------------------------------
 Ver o arquivo de rotas 'WEB'.
 
@@ -26,7 +30,7 @@ Como obter os campos da tabela de ligação, chamada de PIVOT pelo Laravel?
 * Para recuperá-los é necessário usar o método "withPivot" na função que estabelece
 o relacionamento dentro da Model.
 
-Ex.: função da model 'Projetos' que estabelece o relaciomento 'nxn' com a model 'Desenvolvedor'
+Ex.: função na model 'Projetos' que estabelece o relaciomento 'nxn' com a model 'Desenvolvedor'
 
     function desenvolvedores(){
 
